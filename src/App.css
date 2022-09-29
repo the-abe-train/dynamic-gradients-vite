@@ -1,41 +1,380 @@
-#root {
-  max-width: 1280px;
+:root {
+  --controls-bg: rgb(245, 254, 255);
+}
+
+.App {
+  /* text-align: center; */
+  height: 150%;
+  padding: 2rem 0;
+  /* width: clamp(340px, 80%, 1100px); */
   margin: 0 auto;
-  padding: 2rem;
+}
+
+#footer {
+  text-align: left;
+  color: rgb(255, 255, 255);
+  mix-blend-mode: exclusion;
+  /* text-shadow: 1px 1px grey; */
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1.1rem;
+  vertical-align: middle;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.socials-link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+main {
+  background-color: rgb(230, 230, 230);
+  margin: 1rem auto;
+  display: flex;
+  padding: 0 1rem 1rem 1rem;
+  gap: 2rem;
+  border: solid 1px;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px 1px grey;
+}
+
+h1 {
+  margin: 0;
+  font-size: 3rem;
   text-align: center;
+  color: black;
+  mix-blend-mode: multiply, luminosity;
+  /* text-shadow: 2px 2px grey; */
+  margin-bottom: 2rem;
+  /* -webkit-text-stroke: 5px black; */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h2 {
+  margin: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+h3 {
+  margin: 0.5rem 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(90%);
+}
+
+.section {
+  padding: 0.75rem;
+}
+
+.subsection {
+  padding: 0.5rem;
+}
+
+#controls {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+#controls-functions {
+  background-color: var(--controls-bg);
+  margin: 1rem 0;
+  border: solid 1px;
+  border-radius: 1rem;
+}
+
+#wheels {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.wheel {
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  background-color: transparent;
+  z-index: 3;
+}
+
+#wheel-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Speed */
+#speed-input {
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+
+/* Colour picker */
+#colours-header {
+  margin-bottom: 0;
+}
+
+#colour-picker {
+  display: flex;
+  flex-direction: column;
+}
+
+#colours-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#pallet {
+  position: absolute;
+  bottom: -1px;
+  left: 100%;
+  background-color: var(--controls-bg);
+  padding: 1rem;
+  border: solid 1px black;
+  border-left: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+  z-index: 2;
+}
+
+#pallet-btns {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.pallet-btn {
+  margin: 0.1rem;
+  width: 4rem;
+  border-radius: 0.5rem;
+  border: solid 1px black;
+}
+
+.colours-list {
+  display: grid;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  /* width: 100%; */
+}
+
+.colour-square {
+  width: 100%;
+  height: 2rem;
+  border-radius: 0.25em;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.colour-square:hover {
+  box-shadow: 1px 1px 1px black;
+}
+
+#add-colour-btn {
+  width: 4rem;
+  margin: 0 auto;
+}
+
+/* API Buttons */
+#api-btns {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5em auto;
+  align-items: center;
+  width: 100%;
+  max-width: 25rem;
+  justify-content: space-around;
+}
+
+/* Output */
+#output-half {
+  width: 60%;
+}
+
+#output-area {
+  text-align: left;
+  background-color: white;
+  flex-grow: 1;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: small;
+  border: solid 1px;
+  font-family: monospace;
+}
+
+.indent {
+  margin-left: 20px;
+}
+
+.error-text {
+  color: red;
+  font-size: small;
+}
+
+#reset-span {
+  display: flex;
+  /* flex-grow: 1; */
+}
+
+/* button#reset-btn:focus, button#copy-btn:focus { */
+button:focus {
+  outline: 1px -webkit-focus-ring-color dashed;
+}
+
+#reset-btn {
+  color: white;
+  background-color: #db0000;
+  border: solid 1px black;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  margin: 0 1rem;
+}
+
+.btn-1 {
+  padding: 0.5em;
+  text-align: center;
+  /* margin: 0 auto; */
+  /* max-width: 40%; */
+}
+
+.btn-api {
+  min-width: 5rem;
+  max-width: 10rem;
+  height: 2.5rem;
+  border: solid 1px;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+div:focus {
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+#gist-btn {
+  background-color: #494949;
+  color: white;
+}
+
+#copy-btn {
+  background-color: rgb(176, 218, 255);
+  position: relative;
+}
+
+#small {
+  font-size: small;
+  position: absolute;
+}
+
+.icon {
+  width: auto;
+  vertical-align: middle;
+}
+
+.svg-inline--fa {
+  height: 1.5rem;
+}
+
+#coffee-btn {
+  height: 40px !important;
+  width: 142px !important;
+}
+
+#coffee-btn:hover {
+  filter: brightness(90%);
+}
+
+#window-section {
+  display: none;
+}
+
+#window {
+  width: 80%;
+  height: 6rem;
+  margin: 1rem auto;
+  border: solid 1px;
+  border-radius: 1rem;
+}
+
+.visually-hidden {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 850px) {
+  main {
+    flex-direction: column;
+    gap: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  #controls {
+    width: 100%;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  #output-half {
+    width: 100%;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
 
-.read-the-docs {
-  color: #888;
+  #footer {
+    justify-content: center;
+  }
+
+  .section {
+    padding: 0.75rem 0;
+  }
+
+  #pallet {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: fit-content;
+    background-color: var(--controls-bg);
+    padding: 1rem;
+    border: solid 1px black;
+    border-radius: 0.5rem;
+  }
+
+  #window-section {
+    display: block;
+  }
+
+  .btn-api {
+    margin: 0.5rem;
+  }
+
+  #api-btns {
+    width: 90%;
+  }
+
+  #small {
+    display: none;
+  }
 }

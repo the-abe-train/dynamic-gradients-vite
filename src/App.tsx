@@ -1,34 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import "./App.css";
+import { Console } from "./Console";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  faCheckSquare,
+  faCoffee,
+  faCopy,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+library.add(fab, faCopy, faCheckSquare, faCoffee);
+
+function Header() {
+  return <h1>Dynamic Gradient Generator</h1>;
 }
 
-export default App
+function Footer() {
+  return (
+    <span id="footer" className="icon">
+      <a className="socials-link" href="https://the-abe-train.com">
+        by The Abe Train
+      </a>
+      <a className="socials-link" href="https://twitter.com/theAbeTrain">
+        {" "}
+        <span className="visually-hidden">Twitter</span>
+        <FontAwesomeIcon name="twitter link" icon={["fab", "twitter"]} />
+      </a>
+      <a className="socials-link" href="https://github.com/the-abe-train">
+        <span className="visually-hidden">Github</span>
+        <FontAwesomeIcon name="github link" icon={["fab", "github"]} />
+      </a>
+    </span>
+  );
+}
+
+function App() {
+  return (
+    <div className="App">
+      <Header />
+      <Console />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
