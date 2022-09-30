@@ -63,8 +63,9 @@ function ColourSquare({
 
   function removeColour() {
     // 0 and null are the same for most conditial statements
-    if (Number.isInteger(square)) {
+    if (square) {
       const newList = [...coloursList];
+      console.log("New list", newList);
       newList.splice(square, 1);
       setColoursList(newList);
       setSquare(null);
@@ -149,10 +150,11 @@ export function Colours({
   // On the effect of Colour change, find the Colour in the Colours List
   // and set the Colours list to a new list with that colour changed
   useEffect(() => {
-    const newList = [...coloursList];
-    newList.splice(square, 1, colour);
-    setColoursList(newList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (square) {
+      const newList = [...coloursList];
+      newList.splice(square, 1, colour);
+      setColoursList(newList);
+    }
   }, [colour]);
 
   return (

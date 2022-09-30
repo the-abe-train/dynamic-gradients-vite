@@ -39,6 +39,7 @@ export function Wheel({ name, angle, setAngle }: Props) {
       e.preventDefault();
       e.stopPropagation();
 
+      // @ts-ignore mouse vs touch issues
       const client = e.touches ? e.touches[0] : e;
       const point = { mx: client.clientX, my: client.clientY };
       let { mx, my } = point;
@@ -56,6 +57,7 @@ export function Wheel({ name, angle, setAngle }: Props) {
       e.preventDefault();
       e.stopPropagation();
 
+      // @ts-ignore mouse vs touch issues
       const client = e.touches ? e.touches[0] : e;
       const point = { mx: client.clientX, my: client.clientY };
       let { mx, my } = point;
