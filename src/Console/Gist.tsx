@@ -22,7 +22,7 @@ export function Gist({
 
   // const postGistApi = `${process.env.REACT_APP_DOMAIN}/postgist`;
   // const loginApi = `${process.env.REACT_APP_DOMAIN}/login`;
-  const postGistApi = "";
+  const postGistApi = "/api/createGist";
   const loginApi = "";
 
   function postGist() {
