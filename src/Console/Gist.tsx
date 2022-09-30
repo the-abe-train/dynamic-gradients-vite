@@ -1,5 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { cssString } from "../util";
+
+// PLAN
+// useEffect on load sees if user has code in the the url
+// If code in the url, fetch post api. If not, mount effect does nothing.
+// Click the button
+// User signs into github
+// User is redirected back to main app, this time with code in url
+// effect actually launches this time
+// on cleanup, clean up the url
 
 type Props = {
   cssClass: string;
@@ -20,39 +30,54 @@ export function Gist({
   let gistContent = cssString(speed, coloursList, gradient, scroll, selector);
   gistContent += "\n\n /* Created using dynamicgradients.com */";
 
-  // const postGistApi = `${process.env.REACT_APP_DOMAIN}/postgist`;
-  // const loginApi = `${process.env.REACT_APP_DOMAIN}/login`;
   const postGistApi = "/api/createGist";
-  const loginApi = "";
+  const clientId = import.meta.env.VITE_CLIENT_ID;
+  const githubLogin = `https://github.com/login/oauth/authorize?scope=gist&client_id=${clientId}`;
 
-  function postGist() {
-    const data = {
-      description: "CSS Dynamic Gradient",
-      public: true,
-      files: {
-        "dynamic_gradient.css": {
-          content: gistContent,
+  const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    console.log("Gist loading");
+    const code = new URL(window.location.toString()).searchParams.get("code");
+    if (code) {
+      const gist = {
+        description: "CSS Dynamic Gradient",
+        public: true,
+        files: {
+          "dynamic_gradient.css": {
+            content: gistContent,
+          },
         },
-      },
+      };
+      fetch(postGistApi, {
+        method: "POST",
+        body: JSON.stringify({ gist, code }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(() => setMsg("Gist created!"))
+        .catch((e) => console.error(e));
+    }
+
+    return () => {
+      window.location.replace("localhost:8888");
     };
-    fetch(postGistApi, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      // .then(() => (window.location = loginApi))
-      .then(() => console.log("clicked"))
-      .catch((e) => console.error(e));
-  }
+    // if (window.location)
+  }, []);
 
   return (
-    <button id="gist-btn" className="btn-api" onClick={postGist}>
-      <span className="icon">
-        <FontAwesomeIcon icon={["fab", "github"]} />{" "}
-      </span>
-      Gist{" "}
-    </button>
+    <div>
+      <a href={githubLogin}>
+        <button id="gist-btn" className="btn-api">
+          {/* <button id="gist-btn" className="btn-api" onClick={postGist}> */}
+          <span className="icon">
+            <FontAwesomeIcon icon={["fab", "github"]} />{" "}
+          </span>
+          Gist
+        </button>
+      </a>
+      {msg && <p>{msg}</p>}
+    </div>
   );
 }
